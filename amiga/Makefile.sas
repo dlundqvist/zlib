@@ -57,9 +57,9 @@ gzclose.o: zlib.h zconf.h gzguts.h
 gzlib.o: zlib.h zconf.h gzguts.h
 gzread.o: zlib.h zconf.h gzguts.h
 gzwrite.o: zlib.h zconf.h gzguts.h
+infback.o: zutil.h zlib.h zconf.h inftrees.h inflate.h inffast.h
 inffast.o: zutil.h zlib.h zconf.h inftrees.h inflate.h inffast.h
 inflate.o: zutil.h zlib.h zconf.h inftrees.h inflate.h inffast.h
-infback.o: zutil.h zlib.h zconf.h inftrees.h inflate.h inffast.h
 inftrees.o: zutil.h zlib.h zconf.h inftrees.h
 test/example.o: zlib.h zconf.h
 test/minigzip.o: zlib.h zconf.h
