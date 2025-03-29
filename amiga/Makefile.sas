@@ -16,7 +16,7 @@ SCOPTIONS=OPTSCHED OPTINLINE OPTALIAS OPTTIME OPTINLOCAL STRMERGE \
 OBJS = adler32.o compress.o crc32.o gzclose.o gzlib.o gzread.o gzwrite.o \
        uncompr.o deflate.o trees.o zutil.o inflate.o infback.o inftrees.o inffast.o
 
-TEST_OBJS = example.o minigzip.o
+TEST_OBJS = test/example.o test/minigzip.o
 
 all: SCOPTIONS example minigzip
 
@@ -32,17 +32,17 @@ install: z.lib
 z.lib: $(OBJS)
 	oml z.lib r $(OBJS)
 
-example: example.o z.lib
-	$(CC) $(CFLAGS) LINK TO $@ example.o $(LDFLAGS)
+example: test/example.o z.lib
+	$(CC) $(CFLAGS) LINK TO $@ test/example.o $(LDFLAGS)
 
-minigzip: minigzip.o z.lib
-	$(CC) $(CFLAGS) LINK TO $@ minigzip.o $(LDFLAGS)
+minigzip: test/minigzip.o z.lib
+	$(CC) $(CFLAGS) LINK TO $@ test/minigzip.o $(LDFLAGS)
 
 mostlyclean: clean
 clean:
-	-delete force quiet example minigzip *.o z.lib foo.gz *.lnk SCOPTIONS
+	-delete force quiet example minigzip \#?.o test/\#?.o z.lib foo.gz \#?.lnk SCOPTIONS
 
-SCOPTIONS: Makefile.sas
+SCOPTIONS: amiga/Makefile.sas
 	copy to $@ <from <
 $(SCOPTIONS)
 <
@@ -53,7 +53,6 @@ adler32.o: zlib.h zconf.h
 compress.o: zlib.h zconf.h
 crc32.o: crc32.h zlib.h zconf.h
 deflate.o: deflate.h zutil.h zlib.h zconf.h
-example.o: zlib.h zconf.h
 gzclose.o: zlib.h zconf.h gzguts.h
 gzlib.o: zlib.h zconf.h gzguts.h
 gzread.o: zlib.h zconf.h gzguts.h
@@ -62,7 +61,8 @@ inffast.o: zutil.h zlib.h zconf.h inftrees.h inflate.h inffast.h
 inflate.o: zutil.h zlib.h zconf.h inftrees.h inflate.h inffast.h
 infback.o: zutil.h zlib.h zconf.h inftrees.h inflate.h inffast.h
 inftrees.o: zutil.h zlib.h zconf.h inftrees.h
-minigzip.o: zlib.h zconf.h
+test/example.o: zlib.h zconf.h
+test/minigzip.o: zlib.h zconf.h
 trees.o: deflate.h zutil.h zlib.h zconf.h trees.h
 uncompr.o: zlib.h zconf.h
 zutil.o: zutil.h zlib.h zconf.h
