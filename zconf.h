@@ -474,7 +474,8 @@ typedef uLong FAR uLongf;
 
 #ifndef Z_HAVE_UNISTD_H
 #  if defined(__WATCOMC__) || defined(__GO32__) || \
-      (defined(_LARGEFILE64_SOURCE) && !defined(_WIN32))
+      (defined(_LARGEFILE64_SOURCE) && !defined(_WIN32)) || \
+      defined(__SASC)
 #    define Z_HAVE_UNISTD_H
 #  endif
 #endif
@@ -483,6 +484,9 @@ typedef uLong FAR uLongf;
 #    include <unistd.h>         /* for SEEK_*, off_t, and _LFS64_LARGEFILE */
 #    ifdef VMS
 #      include <unixio.h>       /* for off_t */
+#    endif
+#    if defined(__SASC)
+#      include <stat.h>       /* for off_t */
 #    endif
 #    ifndef z_off_t
 #      define z_off_t off_t
